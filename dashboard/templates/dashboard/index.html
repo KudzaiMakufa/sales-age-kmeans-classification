@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block header %}
+    <link href="{% static "admin/assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" %}" rel="stylesheet">
+{% endblock %}
+{% block content %}
+
+<form action="" method="post" autocomplete="off" enctype="multipart/form-data">{% csrf_token %}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">  
+            <div class="card-body">
+
+                
+                <div class="form-group mb-4">
+                  
+                    <label>Dataset Name</label>
+                    <div class="input-group">
+                        {{ form.application_name }}
+                        
+                    </div>
+                    <div class="text-danger"> {{ form.application_name.errors }}</div>
+                </div>
+
+                     <div class="form-group mb-4">
+                  
+                    <label>{{ form.data_mode.label_tag}}</label>
+                    <div class="input-group">
+                        {{ form.data_mode }}
+                        
+                    </div>
+                    <div class="text-danger"> {{ form.data_mode.errors }}</div>
+                </div>
+             
+             
+
+                
+
+                    
+
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="form-group mb-4 data-file">
+                    
+                    <label>Dataset File</label>
+                    <div class="input-group">
+                        {{ form.library_list }}
+                    </div>
+                    <div class="text-danger"> {{ form.library_list.errors }}</div>
+                </div>
+                
+                
+
+        
+                <br>
+            </div>
+              
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+     
+      <input type="submit" value="Save" class="btn btn-success float-left">
+    </div>
+  </div>
+</form>
+{% endblock %}
+
+
+{% block footer %}
+
+    <script>
+        $('#id_data_mode').on('change', function() {
+            if(this.value == "csv" | this.value == "text"){
+                $('.data-file').css("display", 'block');
+             
+            }else{
+                $('.data-file').css("display", 'none');
+             
+            }
+        });
+    </script>
+    <script src="{% static "admin/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js" %}"></script>
+    <script src="{% static "admin/assets/js/pages/form-advanced.init.js" %}"></script>
+    <script src="{% static "admin/assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js" %}"></script>
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,147 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="row mb-5">
+  <div class="col-6">  
+     <h4>Data Description</h4>
+      
+     {{table_description|safe}}
+   
+  </div>
+  <div class="col-6"> 
+    <canvas id="myChart" width="400" height="300"></canvas>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">  
+     <h4>Scatter Diagram</h4>
+
+     <div id="myDiv"></div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-12">  
+     <h4>KMEANS CLUSTERS</h4>
+
+     <div id="kmeans_clust"></div>
+  </div>
+
+</div>
+
+<div class="row mb-5">
+  <div class="col-12">  
+     <h4>Clusters Table</h4>
+      
+     {{table_clusters|safe}}
+   
+  </div>
+
+</div>
+
+
+
+
+  {% endblock %}
+
+
+  {% block footer %}
+         <!-- Required datatable js -->
+     <script src="{% static "admin/assets/libs/datatables.net/js/jquery.dataTables.min.js" %}"></script>
+     <script src="{% static "admin/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js" %}"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+     <!-- Datatable init js -->
+     <script src="{% static "admin/assets/js/pages/datatables.init.js" %}"></script>
+    <script src="https://cdn.plot.ly/plotly-2.6.3.min.js"></script>
+
+
+    <script type = "text/javascript">
+   
+
+      var all_scatter = {
+        x: {{age|safe}},
+        y: {{sales|safe}},
+        mode: 'markers',
+        type: 'scatter',
+        marker: {
+          color: "blue"
+        }
+      };
+
+
+       var cluster_0 = {
+        x: {{df1_age|safe}},
+        y: {{df1_sales|safe}},
+        mode: 'markers',
+        type: 'scatter',
+         marker: {
+          color: "red"
+        }
+      };
+
+       var cluster_1 = {
+        x: {{df2_age|safe}},
+        y: {{df2_sales|safe}},
+        mode: 'markers',
+        type: 'scatter',
+         marker: {
+          color: "green"
+        }
+      };
+
+
+      {% comment %} alert(trace1.x[0]); {% endcomment %}
+
+      var data = [all_scatter];
+      Plotly.newPlot('myDiv', data, {}, {showSendToCloud: true});
+
+      Plotly.newPlot('kmeans_clust', [cluster_0,cluster_1], {}, {showSendToCloud: true});
+      {% comment %} Plotly.newPlot('kmeans_clust', [], {}, {showSendToCloud: true}); {% endcomment %}
+      
+    
+    </script>
+
+    <script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Count', 'Mean', 'STD', 'Min', '25%', '50%' , '75%'],
+        datasets: [{
+            label: '# of Sales',
+            data: {{pie_data|safe}},
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+  {% endblock %}
