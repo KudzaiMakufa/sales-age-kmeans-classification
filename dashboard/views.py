@@ -24,6 +24,7 @@ from sklearn.cluster import KMeans
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from matplotlib import pyplot as plt
+from time import sleep
 
 
 
@@ -48,8 +49,8 @@ def dashboard_index(request):
         form = Library_Form()
     
     context = {
-        
-        'title': "Pull Data",
+         
+        'title': "Upload Project  DataSet",
         'form':form
         
     } 
@@ -125,7 +126,7 @@ def process_data(request ,lib_id=None):
     df2_age = []
     df2_sales = []
     pie_data = []
-    print()
+    sleep(5)
     if library.data_mode  == "csv":
         filename = library.library_list
 

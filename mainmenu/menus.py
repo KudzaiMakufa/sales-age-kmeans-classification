@@ -17,7 +17,7 @@ MENUS = {
         {
             "name": "Graphs",
             "url": "#",
-            "icon_class": 'mdi mdi-google-analytics',
+            "icon_class": 'mdi mdi-graph',
             "submenu": [
                 {
                     "name": "Classification",
