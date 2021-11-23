@@ -1,5 +1,5 @@
 Implementation of Hadoop mapreduce to logically process and  store waether data from openmap API and csv files<br>
-Python Django Based
+<b>Python Django Based</b>
 
 <h4>Install dependencies</h4>
 <ol>
