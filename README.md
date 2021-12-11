@@ -1,4 +1,4 @@
-Implementation of Hadoop mapreduce to logically process and  store waether data from openmap API and csv files<br>
+Classifcation of Customer age and sales data to generte clusters and predict
 <b>Python Django Based</b>
 
 <h4>Install dependencies</h4>
